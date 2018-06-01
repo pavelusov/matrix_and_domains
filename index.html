@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Test</title>
+  <link rel="stylesheet/less" type="text/css" href="styles.less" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.0.2/less.min.js" ></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+<div class="wrapper">
+  <div>
+    <h2>Введите размерность матрицы:</h2>
+    <form id="matrixForm">
+      <div class="inputs">
+        <div class="inputWrapper">
+          <label for="nMatrix">Размерность <b>N</b>:</label>
+          <input
+                  type="text"
+                  name="n"
+                  id="nMatrix"
+                  placeholder="введите N"
+                  data-max="40"
+                  data-min="2"
+                  data-error-max="Не больше"
+                  data-error-min="Не меньше"
+                  data-error-not-number="Введите число"
+          >
+          <p class="errorMessage"></p>
+        </div>
+        <div class="inputWrapper">
+          <label for="mMatrix">Размерность <b>M</b>:</label>
+          <input
+                  type="text"
+                  name="m"
+                  id="mMatrix"
+                  placeholder="введите M"
+                  data-max="40"
+                  data-min="2"
+                  data-error-max="Не больше"
+                  data-error-min="Не меньше"
+                  data-error-not-number="Введите число"
+          >
+          <p class="errorMessage"></p>
+        </div>
+        <div class="inputWrapper">
+          <label for="probability">Вероятность заполнения <b>единицами</b>:</label>
+          <input
+                  type="text"
+                  name="p"
+                  id="probability"
+                  placeholder="0.01 ... 0.99"
+                  data-max="0.99"
+                  data-min="0.01"
+                  data-error-max="Диапазон чисел до"
+                  data-error-min="Диапазон чисел от"
+                  data-error-not-number="Введите число"
+          >
+          <p class="errorMessage"></p>
+        </div>
+      </div>
+      <br>
+      <input type="submit" class="js-btn-create-matrix" value="Создать матрицу"/>
+    </form>
+  </div>
+</div>
+<script type="text/babel" src="index.js"></script>
+</body>
+</html>

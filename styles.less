@@ -1,0 +1,49 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+h2 {
+    background: #f0f0f0;
+    display: block;
+    text-align: center;
+    padding: 10px;
+}
+input[type=submit] {
+    background: #f0f0f0;
+    padding: 5px;
+    outline: 0;
+}
+input[type=submit]:active {
+    background: #f04345;
+    color: #fff;
+}
+.wrapper {
+    width: 1024px;
+    margin: 0 auto;
+}
+.inputs {
+    margin: 10px 0;
+    input {
+        padding: 5px;
+        border-radius: 5px;
+    }
+    label {
+        margin-bottom: 7px;
+    }
+    label, input {
+        display: block;
+    }
+    .inputWrapper {
+        margin-bottom: 20px;
+        .errorMessage {
+            color: #bc3435;
+            font-weight: 600;
+            display: none;
+        }
+        .hasError + .errorMessage {
+            display: block;
+        }
+    }
+}
+
+
