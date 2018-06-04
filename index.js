@@ -3,13 +3,71 @@ window.onload = function (ev) {
     let isValidForm = false;
     let n = 3;
     let m = 3;
+    let size = n * m;
     let btnCreateMatrix = document.querySelector('.js-btn-create-matrix');
     let matrixForm = document.getElementById('matrixForm');
 
     // Навешиваем слушатель на форму
     matrixForm.addEventListener('input', validate);
+    // Validation
+    function validate(event) {
+        event.stopPropagation();
 
-    let size = n * m;
+        const inp = new Input(event.target);
+        inp.validate(getTextError);
+
+        function getTextError(instance) {
+
+            const patternInt = /^[1-9]\d*/;
+            const patternIntZero = /^0$/;
+            const patternFloat = /^0\.\d+/;
+            const patternFloatZeroDot = /^0\.?$/;
+            const patternIsFloat = /^0\.\d?/;
+            const patternFloatZeroDotZero = /^0\.0$/;
+            let valueInt = -1;
+
+            const isFloat = patternIsFloat.test(instance.min.value);
+
+            // empty value
+            if (instance.value === "") {
+                return;
+            }
+
+            // 0
+            if (!isFloat && patternIntZero.test(instance.value)) {
+                return instance.min.error;
+            }
+
+            // 0. or 0.0
+            if (isFloat && (patternFloatZeroDot.test(instance.value) || patternFloatZeroDotZero.test(instance.value))) {
+                return;
+            }
+
+            // int
+            if (patternInt.test(instance.value)) {
+                valueInt =  patternInt.exec(instance.value)[0];
+                valueInt = parseInt(valueInt);
+            }
+
+            // float
+            if (isFloat && patternFloat.test(instance.value)) {
+                console.log('float');
+                valueInt =  patternFloat.exec(instance.value)[0];
+                valueInt = parseFloat(valueInt);
+            }
+
+            // return text error
+            if (valueInt < instance.min.value) {
+                return instance.min.error;
+            }
+
+            if (valueInt > instance.max.value) {
+                return instance.max.error;
+            }
+        }
+    }
+
+
 
 // ** AUTO FILL **
 
@@ -155,63 +213,5 @@ class Input {
             return;
         }
         this.showError(text);
-    }
-}
-
-// Validation
-function validate(event) {
-    event.stopPropagation();
-
-    const inp = new Input(event.target);
-    inp.validate(getTextError);
-
-    function getTextError(instance) {
-
-        const patternInt = /^[1-9]\d*/;
-        const patternIntZero = /^0$/;
-        const patternFloat = /^0\.\d+/;
-        const patternFloatZeroDot = /^0\.?$/;
-        const patternIsFloat = /^0\.\d?/;
-        const patternFloatZeroDotZero = /^0\.0$/;
-        let valueInt = -1;
-
-        const isFloat = patternIsFloat.test(instance.min.value);
-
-        // empty value
-        if (instance.value === "") {
-            return;
-        }
-
-        // 0
-        if (!isFloat && patternIntZero.test(instance.value)) {
-            return instance.min.error;
-        }
-
-        // 0. or 0.0
-        if (isFloat && (patternFloatZeroDot.test(instance.value) || patternFloatZeroDotZero.test(instance.value))) {
-            return;
-        }
-
-        // int
-        if (patternInt.test(instance.value)) {
-            valueInt =  patternInt.exec(instance.value)[0];
-            valueInt = parseInt(valueInt);
-        }
-
-        // float
-        if (isFloat && patternFloat.test(instance.value)) {
-            console.log('float');
-            valueInt =  patternFloat.exec(instance.value)[0];
-            valueInt = parseFloat(valueInt);
-        }
-
-        // return text error
-        if (valueInt < instance.min.value) {
-            return instance.min.error;
-        }
-
-        if (valueInt > instance.max.value) {
-            return instance.max.error;
-        }
     }
 }

@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <title>Test</title>
   <link rel="stylesheet/less" type="text/css" href="styles.less" />
-  <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.0.2/less.min.js" ></script>
-  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/3.0.2/less.min.js" ></script>
 </head>
 <body>
 <div class="wrapper">
@@ -60,17 +59,26 @@
         </div>
       </div>
       <br>
-      <input type="submit" class="js-btn-create-matrix" value="Создать матрицу"/>
-      <input type="submit" class="js-btn-create-matrix" value="АВТО"/>
+      <input
+              type="submit"
+              id="btnEmptyMatrix"
+              class="js-btn-create-matrix"
+              disabled
+              value="Создать матрицу"/>
+      <input
+              type="submit"
+              id="btnFilledMatrix"
+              class="js-btn-create-matrix"
+              disabled
+              value="АВТО"/>
     </form>
   </div>
   <div class="step">
     <h2>Матрица</h2>
-    <div id="matrix">
-
-    </div>
+    <div id="matrix"></div>
   </div>
 </div>
-<script type="text/babel" src="index.js"></script>
+<script data-main="scripts/main.js"
+        src="scripts/vendor/require/require.js"></script>
 </body>
 </html>
